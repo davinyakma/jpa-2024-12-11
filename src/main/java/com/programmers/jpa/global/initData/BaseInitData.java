@@ -72,8 +72,12 @@ public class BaseInitData {
 
     @Transactional
     public void work3() {
-        Post post1 = postService.findById(1).get();
+        Post post1 = postService.findById(1).get(); // 즉시 SELECT 쿼리가 발생
 
-        post1.addComment("comment4");
+        post1.getComments().size(); // 즉시 SELECT 쿼리가 발생
+
+        post1.addComment("comment4"); // 위, 아래의 쿼리가 없다면 댓글들을 가져와서 comments 를 채우는 SELECT 없이 INSERT 쿼리만 발생, INSERT 쿼리는 트랜잭션이 종료되면 반영된다. 이 작업은 더티체킹이 아니라 PERSIST 에 의해서 이루어진다. PERSIST==INSERT, 더티체킹==UPDATE
+
+        post1.getComments().get(2); // 이런경우에도 SELECT 쿼리가 발생
     }
 }
