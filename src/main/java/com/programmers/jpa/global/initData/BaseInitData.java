@@ -48,6 +48,7 @@ public class BaseInitData {
         Member memberUser1 = memberService.findByUsername("user1").get();
         Member memberUser2 = memberService.findByUsername("user2").get();
         Member memberUser3 = memberService.findByUsername("user3").get();
+
         Post post1 = postService.write(memberUser1, "title1", "content1");
         Post post2 = postService.write(memberUser1, "title2", "content2");
         Post post3 = postService.write(memberUser2, "title3", "content3");
@@ -70,6 +71,7 @@ public class BaseInitData {
         post1.addTag("IT");
         post1.addTag("Spring");
         post1.addTag("JPA");
+        post1.addTag("JPA"); // 중복 태그 추가는 방어가 잘 되어 있다.
 
         post2.addTag("소설");
         post2.addTag("문학");
